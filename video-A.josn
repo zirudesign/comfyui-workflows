@@ -1,0 +1,70 @@
+{
+  "3": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "stable-video-diffusion-img2vid-xt-1-1.safetensors",
+      "vae_name": "vae-ft-mse-840000-ema-pruned.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 576,
+      "batch_size": 16
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 12345,
+      "steps": 20,
+      "cfg": 2.5,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "karras",
+      "denoise": 0.05,
+      "model": ["3", 0],
+      "positive": ["7", 0],
+      "negative": ["7", 1],
+      "latent_image": ["4", 0]
+    }
+  },
+  "6": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": ["2", 0],
+      "vae": ["3", 2]
+    }
+  },
+  "7": {
+    "class_type": "SVD_Conditioning",
+    "inputs": {
+      "clip": ["3", 1],
+      "image_latent": ["6", 0],
+      "fps": 8,
+      "motion_bucket_id": 127,
+      "noise_augmentation": 0.02
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["5", 0],
+      "vae": ["3", 2]
+    }
+  },
+  "9": {
+    "class_type": "VHS_VideoCombine",
+    "inputs": {
+      "images": ["8", 0],
+      "frame_rate": 8,
+      "format": "video/h264-mp4"
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "你的建筑效果图.png"
+    }
+  }
+}

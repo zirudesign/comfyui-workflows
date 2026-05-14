@@ -1,0 +1,649 @@
+{
+  "id": "b22656bd-c97d-4ad6-b375-8af0907d81eb",
+  "revision": 0,
+  "last_node_id": 265,
+  "last_link_id": 412,
+  "nodes": [
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        1322.8410220021844,
+        221.8814906474002
+      ],
+      "size": [
+        210,
+        46
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 404
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.18.1",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 12,
+      "type": "ControlNetLoader",
+      "pos": [
+        587.1614958116903,
+        538.5176941816414
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            24
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.18.1",
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "control_v11p_sd15_lineart_fp16.safetensors"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        45.71783781099989,
+        354.57220314499995
+      ],
+      "size": [
+        315,
+        98
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            3,
+            5
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.18.1",
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "xsarchitectural_v11.ckpt"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": [
+        542.2031242289205,
+        796.0269253816693
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.18.1",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        768,
+        768,
+        1
+      ]
+    },
+    {
+      "id": 13,
+      "type": "LineArtPreprocessor",
+      "pos": [
+        589.7278075451447,
+        650.3881873220711
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 412
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_controlnet_aux",
+        "ver": "1.1.5",
+        "Node name for S&R": "LineArtPreprocessor"
+      },
+      "widgets_values": [
+        "disable",
+        768
+      ]
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        438.8520130000004,
+        301.7786383000004
+      ],
+      "size": [
+        425.27801513671875,
+        180.6060791015625
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            31,
+            33
+          ]
+        }
+      ],
+      "title": "CLIP文本编码（负）",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.18.1",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "blurry, low quality, distorted, ugly, deformed, disfigured, bad anatomy, watermark, text, signature, logo, extra limbs, missing limbs, floating objects, messy, cluttered, dirty, noisy, grainy, speckles, vertical lines, stripes, ceiling lines, floor lines, grid lines, artifacts, bad lighting, overexposed, underexposed, cartoon, anime, illustration, painting, sketch, 3d render style, unrealistic materials, fake reflections"
+      ]
+    },
+    {
+      "id": 257,
+      "type": "VAELoader",
+      "pos": [
+        991.2213738539017,
+        96.33878503902869
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            404
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.18.1",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "vae-ft-mse-840000-ema-pruned.safetensors"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "LoadImage",
+      "pos": [
+        137.81879097347567,
+        589.6176021581343
+      ],
+      "size": [
+        270,
+        314.0000000000001
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            412
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.18.1",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "555-1.png",
+        "image"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [
+        951.7305379183294,
+        221.61631269328018
+      ],
+      "size": [
+        315,
+        262
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 27
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 33
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.18.1",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1013746582956240,
+        "randomize",
+        23,
+        7,
+        "dpmpp_2m_sde",
+        "karras",
+        0.75
+      ]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        444.5993103999996,
+        85.71753530000014
+      ],
+      "size": [
+        422.84503173828125,
+        164.31304931640625
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            30
+          ]
+        }
+      ],
+      "title": "CLIP文本编码（正）",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.18.1",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "A hyper-photorealistic photograph of a modern minimalist lobby, taken with a professional DSLR camera. The lighting is natural and dynamic, with soft sunlight streaming through the large windows, creating subtle lens flares and realistic volumetric light effects in the air. The materials show realistic signs of subtle wear and tear: the white marble reception desk has a few faint watermarks; the dark grey wood veneer wall has a slight sheen from years of cleaning; the brushed bronze metal accents have developed a gentle patina. The overall atmosphere is lived-in and authentic, not a sterile showroom. Ultra-detailed, sharp focus, 8K, cinematic lighting."
+      ]
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        1577.4148899022255,
+        219.67451838319028
+      ],
+      "size": [
+        210,
+        270
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 9
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.18.1"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "ControlNetApplyAdvanced",
+      "pos": [
+        972.7106451195101,
+        549.9113394235372
+      ],
+      "size": [
+        283.4859375,
+        186
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 30
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 31
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 24
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 25
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            27
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.18.1",
+        "Node name for S&R": "ControlNetApplyAdvanced"
+      },
+      "widgets_values": [
+        0.7,
+        0,
+        1
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      4,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      5,
+      0,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      3,
+      4,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      4,
+      1,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      7,
+      3,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      9,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      24,
+      12,
+      0,
+      15,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      25,
+      13,
+      0,
+      15,
+      3,
+      "IMAGE"
+    ],
+    [
+      27,
+      15,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      30,
+      6,
+      0,
+      15,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      31,
+      7,
+      0,
+      15,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      33,
+      7,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      404,
+      257,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      412,
+      10,
+      0,
+      13,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8390545288824108,
+      "offset": [
+        -646.2833158997615,
+        82.64717499262747
+      ]
+    },
+    "frontendVersion": "1.41.21"
+  },
+  "version": 0.4
+}
